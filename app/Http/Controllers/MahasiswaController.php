@@ -13,8 +13,7 @@ class MahasiswaController extends Controller
             ['nama' => 'Sinta', 'alamat' => 'Surabaya', 'gender' => 'P'],
         ];
 
-        // Parsing data ke view
-        return view('mahasiswa.index', [
+        return view('mahasiswa', [
             'judul'     => 'DAFTAR MAHASISWA',
             'mahasiswa' => $mahasiswa,
         ]);
