@@ -25,10 +25,24 @@ Route::post('/kalkulator/segitiga', [KalkulatorController::class, 'hitungSegitig
 //import controller EmployeController
 use App\Http\Controllers\EmployeController;
 
-//route CRUD Employe
-Route::get('/employe',[EmployeController::class, 'index']);
-Route::get('/employe/create',[EmployeController::class, 'create']);
-Route::post('/employe/store',[EmployeController::class, 'store']);
-Route::get('/employe/edit/{employe}',[EmployeController::class, 'show']);
-Route::put('/employe/{employe}',[EmployeController::class, 'update']);
-Route::delete('/employe/{employe}',[EmployeController::class, 'destroy']);
+//load controller
+use App\Http\Controllers\AuthController;
+
+//halaman login
+Route::get('/login', function(){
+    return view('login');
+});
+
+//route untuk proses login
+Route::post('/login',[AuthController::class, 'cek']);
+
+//route group yang harus login dahulu
+Route::group(['middleware' => 'islogin'], function(){
+    Route::get('/employe',[EmployeController::class, 'index']);
+    Route::get('/employe/create',[EmployeController::class, 'create']);
+    Route::post('/employe/store',[EmployeController::class, 'store']);
+    Route::get('/employe/edit/{employe}',[EmployeController::class, 'show']);
+    Route::put('/employe/{employe}',[EmployeController::class, 'update']);
+    Route::delete('/employe/{employe}',[EmployeController::class, 'destroy']);
+    Route::get('/logout',[AuthController::class, 'logout']);
+});

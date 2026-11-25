@@ -12,6 +12,12 @@
         <div class="menu">
             <a href="{{ route('mahasiswa.index') }}" class="{{ request()->routeIs('mahasiswa.*') ? 'active' : '' }}">Mahasiswa</a>
             <a href="{{ route('kalkulator.segitiga') }}" class="{{ request()->routeIs('kalkulator.*') ? 'active' : '' }}">Kalkulator Segitiga</a>
+            @if(session('logged_in'))
+                <a href="/employe" class="{{ request()->is('employe*') ? 'active' : '' }}">Pegawai</a>
+                <a href="/logout">Logout</a>
+            @else
+                <a href="/login">Login</a>
+            @endif
         </div>
     </nav>
 
